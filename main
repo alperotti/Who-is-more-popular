@@ -1,0 +1,53 @@
+from art import logo, vs
+from game_data import data
+from replit import clear
+import random
+
+def play():
+
+  game_over = False
+  current_score = 0
+  rival_b = 0
+  
+  while not game_over:
+    clear()
+    print(f"{logo}\n")
+  
+    if current_score > 0:
+      rival_a = rival_b
+    else:  
+      rival_a = random.randint(0,len(data)-1)
+    
+    follower_a = data[rival_a]["follower_count"]
+    
+    print(f"Compare A: {data[rival_a]['name']}, {data[rival_a]['description']}, from {data[rival_a]['country']}")
+    
+    print(vs)
+    
+    rival_b = random.randint(0,len(data)-1)
+    follower_b = data[rival_b]["follower_count"]
+    
+    print(f"Compare B: {data[rival_b]['name']}, {data[rival_b]['description']}, from {data[rival_b]['country']}")
+  
+    print(follower_a , follower_b)
+    answer = input("Who has more followers ? 'a' or 'b'")
+    
+    if follower_a > follower_b:
+      winner = "a"
+    else:
+      winner = "b"
+      
+    print(answer, winner)
+    if answer == winner:
+      current_score += 1
+      print(f"You are right and current score: {current_score}")
+    else:
+      print(f"Sorry, that's wrong. Final score: {current_score}")
+      game_over = True
+      again = input("Do you want play again? 'y' or 'n'")
+      if again == "y":
+        play()
+      else:
+        clear()
+        
+play()
